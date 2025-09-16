@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIML Department Overview</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #961111;
+    }
+    header {
+      background-color: #821019;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .faculty-card {
+      background: #f5f9ff;
+      border: 1px solid #c9d8f0;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .faculty-card:hover {
+      transform: translateY(-5px);
+    }
+    .faculty-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 2px solid #7d0a0a;
+    }
+    .faculty-card h3 {
+      margin: 10px 0 5px;
+      color: #770e0e;
+    }
+    .faculty-card p {
+      margin: 3px 0;
+      font-size: 0.9rem;
+    }
+    .resources-list {
+      background: #f5f9ff;
+      border: 1px solid #c9d8f0;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .resources-list ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+    footer {
+      background-color: #6f0f0f;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AIML Department</h1>
+    <p>Artificial Intelligence & Machine Learning</p>
+  </header>
+
+  <section id="about">
+    <h2>About the Department</h2>
+    <p>The AIML department is dedicated to nurturing the next generation of innovators in Artificial Intelligence and Machine Learning. Our curriculum combines foundational computer science principles with advanced AI/ML methodologies, fostering creativity, critical thinking, and industry readiness.</p>
+  </section>
+
+  <section id="faculty">
+    <h2>Faculty Profiles</h2>
+    <div class="faculty-grid">
+      <div class="faculty-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty 1">
+        <h3>Dr. Asha</h3>
+        <p>Ph.D. in Machine Learning</p>
+        <p>Email: asha@college.edu</p>
+      </div>
+      <div class="faculty-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty 2">
+        <h3>Prof. Darshan A</h3>
+        <p>M.Tech in AI</p>
+        <p>Email: dharshanA@college.edu</p>
+      </div>
+      <div class="faculty-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty 3">
+        <h3>Prof. Chethan </h3>
+        <p>Ph.D. in Computer Vision</p>
+        <p>Email: chethan@college.edu</p>
+      </div>
+      <div class="faculty-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty 4">
+        <h3>Ms. D. Patel</h3>
+        <p>M.Tech in Data Science</p>
+        <p>Email: dpatel@college.edu</p>
+      </div>
+      <div class="faculty-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty 5">
+        <h3>Mr.B. siddramappa</h3>
+        <p>M.E. in AI Systems</p>
+        <p>Email: siddu@college.edu</p>
+      </div>
+      <div class="faculty-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty 6">
+        <h3>Prof. Deepa A L</h3>
+        <p>Ph.D. in NLP</p>
+        <p>Email: deepa@college.edu</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="resources">
+    <h2>Learning Resources</h2>
+    <div class="resource-list">
+      <ul>
+        <li>AI & ML Lab with GPU-enabled systems</li>
+        <li>Department Digital Library </li>
+        <li>Access to eclips, GitHub Classroom, and Cloud Platforms</li>
+        <li>Regular Workshops and Hackathons</li>
+        <li>Online Learning Platforms: Coursera, NPTEL, edX</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> AIML Department. All Rights Reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

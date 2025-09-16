@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G M UNIVERSITY - Empower Your Learning</title>
+  <style>
+    :root {
+      --primary: #621D1D;
+      --accent: #e49827;
+      --dark: #333;
+      --light: #f9f9f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--light);
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--accent);
+      padding: 30px 20px;
+      text-align: center;
+      animation: fadeDown 1s ease-out;
+    }
+
+    header img {
+      display: block;
+      margin: 15px auto;
+      width: 160px;
+      height: auto;
+      transition: transform 0.3s;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 25px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    nav a:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .hero {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 120px 20px;
+      animation: fadeUp 1.2s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 20px;
+    }
+
+    .quick-links a {
+      flex: 1 1 250px;
+      max-width: 300px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      padding: 25px 15px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .quick-links a:hover {
+      background: #7a2c2c;
+      transform: translateY(-5px);
+    }
+
+    .section {
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .section:nth-child(even) {
+      background: var(--accent);
+    }
+
+    .section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 25px;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeUp 1s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 80%;
+      max-width: 400px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1rem;
+    }
+
+    .contact-form button:hover {
+      background: #7a2c2c;
+    }
+
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>G M UNIVERSITY</h1>
+    <img src="https://www.gmu.ac.in/assets/imgs/gmulogo1.png" alt="GMU Logo">
+    <p>Your Gateway to Quality Education</p>
+  </header>
+
+  <nav>
+    <a href="#courses">About the department</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact Us</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Learn, Grow, Succeed</h1>
+    <p>Explore our wide range of skills and unlock your potential today.</p>
+  </section>
+
+  <!-- Quick Links -->
+  <div class="quick-links">
+    <a href="page1.html">About the Department</a>
+    <a href="page2.html">Programs Offered</a>
+    <a href="page3.html">Faculty Profile</a>
+    <a href="page4.html">Student Achievements</a>
+    <a href="page5.html">Research & Publications</a>
+    <a href="page6.html">Admissions</a>
+  </div>
+
+  <!-- AIML Department Section -->
+  <section id="aiml-info" class="section">
+    <h2>About AIML Department</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>HoD's Message</h3>
+        <p>
+          Welcome to the Department of Artificial Intelligence and Machine Learning (AIML). 
+          Our department fosters innovation, critical thinking, and cutting-edge research 
+          to prepare students for the rapidly evolving tech industry.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Vision</h3>
+        <p>
+          To be a center of excellence in AI & ML, nurturing innovators and leaders 
+          who contribute to technological advancement and societal development.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Mission</h3>
+        <p>
+          • Provide quality education in AI and ML<br>
+          • Promote research, innovation, and industry collaboration<br>
+          • Develop ethical professionals with problem-solving skills
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <h2>What Our Students Say</h2>
+    <div class="cards">
+      <div class="card">
+        <p>"This platform changed my life! Highly recommended."</p>
+        <strong>- Trivikram</strong>
+      </div>
+      <div class="card">
+        <p>"The courses are detailed and easy to follow. Excellent quality."</p>
+        <strong>- Bhavya</strong>
+      </div>
+      <div class="card">
+        <p>"I gained valuable skills that helped me land my dream job."</p>
+        <strong>- Hanumantha</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Get in touch with us today!</p>
+    <form class="contact-form" onsubmit="showThankYouMessage(event)">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="contact_no" placeholder="Your Contact Number" required />
+      <button type="submit">Submit</button>
+      <p id="thank-you-message" style="display:none; color:green; margin-top:10px;">
+        Thank you for contacting us. We look forward to helping you!
+      </p>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 G M UNIVERSITY</p>
+  </footer>
+
+  <script>
+    function showThankYouMessage(event) {
+      event.preventDefault();
+      document.getElementById('thank-you-message').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

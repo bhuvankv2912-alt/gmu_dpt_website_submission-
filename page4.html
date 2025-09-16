@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Admission Activities</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #860f0f;
+    }
+
+    header {
+      background-color: #891212;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      border-left: 6px solid #801515;
+      padding-left: 10px;
+      margin-bottom: 15px;
+      color: #861414;
+    }
+
+    .activity-box {
+      background-color: #f5f7ff;
+      border-left: 5px solid #730e0e;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 8px;
+    }
+
+    .activity-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #7e1212;
+      color: #ffffff;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>University Admission Activities</h1>
+    <p>Ensuring a smooth and transparent admission process</p>
+  </header>
+
+  <section>
+    <h2>📝 Pre-Admission Activities</h2>
+    <div class="activity-box">
+      <ul>
+        <li>Publishing admission notifications and brochures</li>
+        <li>Distributing online/offline application forms</li>
+        <li>Providing career counseling and guidance sessions</li>
+        <li>Conducting entrance examinations (if applicable)</li>
+      </ul>
+    </div>
+
+    <h2>📥 Admission Process Activities</h2>
+    <div class="activity-box">
+      <ul>
+        <li>Collecting and verifying application forms and documents</li>
+        <li>Preparing merit lists or publishing entrance results</li>
+        <li>Conducting interviews / group discussions</li>
+        <li>Allotting seats and confirming admissions</li>
+        <li>Collecting fees and issuing admission receipts</li>
+      </ul>
+    </div>
+
+    <h2>📂 Post-Admission Activities</h2>
+    <div class="activity-box">
+      <ul>
+        <li>Issuing admission letters, roll numbers, and ID cards</li>
+        <li>Creating student records in the database</li>
+        <li>Conducting orientation and induction programs</li>
+        <li>Processing scholarships and financial aid applications</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> University Admissions Department | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

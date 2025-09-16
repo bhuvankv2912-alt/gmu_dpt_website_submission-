@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIML Department — Programs & Courses</title>
+  <style>
+    :root{
+      --dark-blue:#962424; /* primary */
+      --accent:#a91717;    /* slightly lighter */
+      --muted:#f3f6fb;  
+      --card:#ffffff;
+      --text:#0a0a0a;
+      --glass: rgba(255,255,255,0.85);
+    }
+
+    /* Base reset */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:var(--text); background:var(--muted)}
+
+    /* Page layout */
+    header {
+  background: linear-gradient(270deg, #9d1414, #eb1212, #921212, #a20d0d, #b41212);
+  background-size: 1000% 1000%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+    .container{max-width:1100px;margin:22px auto;padding:0 18px}
+
+    .brand{display:flex;gap:16px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .brand h1{font-size:20px;margin:0}
+    .brand p{margin:0;font-size:13px;opacity:0.9}
+
+    nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:rgba(255,255,255,0.92);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;display:inline-block}
+    nav a:hover{background:rgba(255,255,255,0.06)}
+
+    .hero{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:28px 0}
+    .hero .intro{max-width:66%}
+    .hero h2{margin:0 0 8px 0;font-size:28px}
+    .hero p{margin:0;color:rgba(255,255,255,0.9)}
+    .cta-row{display:flex;gap:12px;margin-top:16px}
+    .btn{background:#fff;color:var(--dark-blue);padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.14);color:#fff}
+
+    /* Main content */
+    main{background:linear-gradient(180deg,transparent rgba(255,255,255,0));padding:18px 0}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
+
+    /* Programs list */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(10,15,30,0.06);border:1px solid #eef3fb}
+    .card h3{margin:0 0 6px 0;color:var(--dark-blue)}
+    .card p{margin:0 0 12px 0;color:#333;font-size:14px}
+    .card .small{font-size:13px;color:#e3373f}
+    .card a{display:inline-block;margin-top:10px;text-decoration:none;padding:8px 10px;border-radius:8px;background:var(--dark-blue);color:#fff;font-weight:600}
+
+    /* Sidebar */
+    aside{position:relative}
+    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(10,15,30,0.04);border:1px solid #eef3fb}
+    .panel h4{margin:0 0 10px 0;color:var(--dark-blue)}
+    .course-list{list-style:none;padding:0;margin:0}
+    .course-list li{padding:8px 0;border-bottom:1px dashed #eef3fb;font-size:14px}
+
+    /* Curriculum section */
+    section.curriculum{margin-top:22px}
+    .semester-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+    .sem{background:linear-gradient(180deg,#fff,#fbfdff);padding:12px;border-radius:10px;border:1px solid #eef3fb}
+    .sem h5{margin:0 0 6px 0}
+    .sem ul{margin:0;padding-left:18px}
+
+    footer{margin-top:34px;padding:18px 0;color:#344;opacity:0.9}
+
+    /* Responsive */
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.hero .intro{max-width:100%}.brand h1{font-size:18px}}
+
+    /* small utilities */
+    .muted{color:#a91111;font-size:14px}
+    .tag{display:inline-block;background:rgba(7,43,102,0.06);color:var(--dark-blue);padding:6px 8px;border-radius:999px;font-weight:600;font-size:13px}
+
+    /* accessibility focus */
+    a:focus{outline:3px solid rgba(17,71,168,0.18);outline-offset:3px}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">GMU</div>
+        <div>
+          <h1>Department of Artificial Intelligence & Machine Learning</h1>
+          <p>Preparing students for research and industry roles in AI, ML</p>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#programs">Programs</a>
+        <a href="#courses">Core Courses</a>
+        <a href="#curriculum">Curriculum</a>
+        <a href="#faculty">Faculty</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="hero">
+        <div class="intro">
+          <h2>Programs & Courses — AIML</h2>
+          <p>Our department offers undergraduate, postgraduate and research programs focused on building solid foundations in mathematics, programming, and modern machine learning techniques. Below you'll find program descriptions, sample core courses and a semester-wise curriculum outline.</p>
+
+          <div class="cta-row">
+            <a class="btn" href="#programs">Explore Programs</a>
+            
+          </div>
+        </div>
+        <div style="min-width:220px; text-align:right">
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <div>
+        <section id="programs">
+          <h2 style="color:var(--dark-blue);margin-bottom:8px">Programs Offered</h2>
+          <p class="muted">We offer a range of degree programs and short-term certifications to suit different career paths.</p>
+
+          <div class="cards" style="margin-top:12px">
+            <article class="card">
+              <h3>B.Tech — Artificial Intelligence & Machine Learning</h3>
+              <p>4-year undergraduate program combining core computer science, mathematics and specialized AI/ML training — ideal for industry roles and higher studies.</p>
+              <div class="small">Intake: 60 | Duration: 4 years | Degree: B.Tech</div>
+              <a href="#curriculum">Learn more</a>
+            </article>
+
+            <article class="card">
+              <h3>M.Tech — Artificial Intelligence</h3>
+              <p>Two-year postgraduate program with emphasis on research, advanced deep learning, probabilistic modelling and applied AI systems.</p>
+              <div class="small">Intake: 18 | Duration: 2 years | Degree: M.Tech</div>
+              <a href="#courses">Learn more</a>
+            </article>
+
+            <article class="card">
+              <h3>Ph.D. — AI & ML Research</h3>
+              <p>Research program for students pursuing novel research in AI, ML, Computer Vision, NLP and Robotics with faculty mentorship and funding opportunities.</p>
+              <div class="small">Admission by research proposal and interview</div>
+              <a href="#faculty">Apply</a>
+            </article>
+
+            <article class="card">
+              <h3>Professional Certifications</h3>
+              <p>Short-term industry-aligned certificate courses: Data Science Bootcamp, Deep Learning Applications, MLOps & Model Deployment.</p>
+              <div class="small">Duration: 3–6 months | Online & on-campus options</div>
+            
+            </article>
+
+          </div>
+        </section>
+
+        <section id="courses" style="margin-top:22px">
+          <h2 style="color:var(--dark-blue);margin-bottom:8px">Core Courses</h2>
+          
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+            <div class="card">
+              <h3>Foundations</h3>
+              <ul>
+                <li>Programming for AI (Python)</li>
+                <li>Discrete Mathematics</li>
+                <li>Linear Algebra for ML</li>
+                <li>Probability & Statistics</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Core Machine Learning</h3>
+              <ul>
+                <li>Introduction to Machine Learning</li>
+                <li>Supervised & Unsupervised Learning</li>
+                <li>Deep Learning & Neural Networks</li>
+                <li>Model Evaluation & Validation</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Applications & Systems</h3>
+              <ul>
+                <li>Natural Language Processing (NLP)</li>
+                <li>Computer Vision</li>
+                <li>Reinforcement Learning</li>
+                <li>MLOps & Deployment</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <section id="curriculum" class="curriculum">
+          <h2 style="color:var(--dark-blue);margin-bottom:8px">Sample Semester-wise Curriculum (B.Tech)</h2>
+          
+
+          <div class="semester-grid" style="margin-top:12px">
+            <div class="sem">
+              <h5>Semester I</h5>
+              <ul>
+                <li>Programming for Engineers (Python)</li>
+                <li>Calculus & Linear Algebra</li>
+                <li>Engineering Mechanics</li>
+                <li>Basic Electronics</li>
+              </ul>
+            </div>
+
+            <div class="sem">
+              <h5>Semester II</h5>
+              <ul>
+                <li>Data Structures & Algorithms</li>
+                <li>Probability & Statistics</li>
+                <li>Digital Logic Design</li>
+                <li>Environmental Science</li>
+              </ul>
+            </div>
+
+            <div class="sem">
+              <h5>Semester III</h5>
+              <ul>
+                <li>Machine Learning I (Classical Methods)</li>
+                <li>Database Systems</li>
+                <li>Object Oriented Design</li>
+                <li>Professional Communication</li>
+              </ul>
+            </div>
+
+            <div class="sem">
+              <h5>Semester IV</h5>
+              <ul>
+                <li>Machine Learning II (Advanced Topics)</li>
+                <li>Signal Processing</li>
+                <li>Computer Vision</li>
+                <li>Ethics in AI</li>
+              </ul>
+            </div>
+
+          </div>
+
+        </section>
+
+        <section id="faculty" style="margin-top:22px">
+          <h2 style="color:var(--dark-blue);margin-bottom:8px">Faculty & Research</h2>
+          <p class="muted">Our faculty specialise in areas such as deep learning, NLP, computer vision, robotics and AI fairness. Research groups and labs support student projects and internships.</p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+            <div class="card" style="flex:1 1 220px;min-width:220px">
+              <h3>Dr. Bharat</h3>
+              <p class="small">Associate Professor — Computer Vision & ML</p>
+            </div>
+            <div class="card" style="flex:1 1 220px;min-width:220px">
+              <h3>Prof. Cooper</h3>
+              <p class="small">Assistant Professor — NLP & Language Models</p>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+      <aside>
+        <div class="panel">
+          <h4>Quick Links</h4>
+          <ul style="list-style:none;padding:0;margin:8px 0">
+            <li style="margin-bottom:8px"><a href="#programs">Programs overview</a></li>
+            <li style="margin-bottom:8px"><a href="#courses">Core courses</a></li>
+            <li style="margin-bottom:8px"><a href="#curriculum">Curriculum</a></li>
+            <li style="margin-bottom:8px"><a href="#contact">Contact admissions</a></li>
+          </ul>
+
+          <h4 style="margin-top:14px">Popular Short Courses</h4>
+          <ul class="course-list" style="margin-top:8px">
+            <li>Deep Learning Fundamentals</li>
+            <li>MLOps: CI/CD for models</li>
+            <li>Intro to Computer Vision</li>
+            <li>Applied NLP with Transformers</li>
+          </ul>
+
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="panel">
+          <h4>Contact Admissions</h4>
+          <p class="muted">Email: admissions@aiml.example.edu<br/>Phone: +91 98765 43210</p>
+          <a class="btn" href="#contact">Send Enquiry</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <strong>Department of AIML</strong> — © <span id="year"></span>
+        </div>
+        
+    </footer>
+
+  </main>
+
+  <script>
+    // small JS nicety
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

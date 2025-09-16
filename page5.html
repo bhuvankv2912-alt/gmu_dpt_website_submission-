@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIML Department Achievements</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #760c0c;
+    }
+
+.grad-1{ --g1: linear-gradient(135deg,var(--maroon), #a02828); }
+    .grad-2{ --g1: linear-gradient(135deg,#0b1f3a,#163a66); }
+    .grad-3{ --g1: linear-gradient(135deg,#2b6b8f,#6bb3d6); }
+    .grad-4{ --g1: linear-gradient(135deg,#5a2a6e,#b04aa6); }
+
+    header {
+      background: #860c1c;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      border-left: 6px solid #790f12;
+      padding-left: 10px;
+      margin-bottom: 25px;
+      color: #7b0e0e;
+    }
+
+.gradient-picker{display:flex;gap:8px}
+    .swatch{width:36px;height:36px;border-radius:8px;cursor:pointer;border:2px solid rgba(0,0,0,0.06)}
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .profile-card {
+      background: #f5f7ff;
+      border-left: 5px solid #700d0f;
+      border-radius: 10px;
+      text-align: center;
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .profile-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .profile-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .profile-card h3 {
+      margin: 0;
+      color: #7a0d0d;
+    }
+
+    .profile-card p {
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    footer {
+      background: #6b0909;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AIML Department Achievements</h1>
+    <p>Celebrating Excellence in AI & Machine Learning</p>
+  </header>
+
+  <!-- Faculty Achievements -->
+  <section>
+    <h2>👩‍🏫 Faculty Achievements</h2>
+    <div class="achievements-grid">
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty Achievement 1">
+        <h3>Dr. Ananya Rao</h3>
+        <p>Published 10+ research papers on Deep Learning and received Best Researcher Award 2024.</p>
+      </div>
+
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty Achievement 2">
+        <h3>Prof. Sujith</h3>
+        <p>Developed an ML-based student performance prediction system adopted by IIT universities.</p>
+      </div>
+
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty Achievement 2">
+        <h3>Prof. suraj Mehta</h3>
+        <p>Developed an AI-based student performance prediction system adopted by multiple universities.</p>
+      </div>
+
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Faculty Achievement 3">
+        <h3>Dr. Kavita </h3>
+        <p>Invited as keynote speaker at International ML Conference 2024 in Singapore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Achievements -->
+  <section>
+    <h2>🎓 Student Achievements</h2>
+    <div class="achievements-grid">
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Student Achievement 1">
+        <h3>Arjun Sharma</h3>
+        <p>Winner of National AI Hackathon 2024 for building a healthcare chatbot.</p>
+      </div>
+
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Student Achievement 2">
+        <h3>Sneha Patel</h3>
+        <p>Developed an ML model for crop yield prediction, published in an international journal.</p>
+      </div>
+
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Student Achievement 3">
+        <h3>Ravi Kumar</h3>
+        <p>Secured internship at Google AI Research through his NLP-based project on sentiment analysis.</p>
+      </div>
+
+      <div class="profile-card">
+        <img src="C:\Users\sirik\Desktop\noman.webp" alt="Student Achievement 4">
+        <h3>Priya Nair</h3>
+        <p>Created an AI-powered sign language translator app showcased at Tech Expo 2024.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> AIML Department | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

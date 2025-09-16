@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIML Student Projects</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #741118;
+    }
+    header {
+      background-color: #681010;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1, h2 {
+      margin-bottom: 15px;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .project-card {
+      background: #f5f9ff;
+      border: 1px solid #c15962;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .project-card .content {
+      padding: 15px;
+    }
+    .project-card h3 {
+      margin: 0 0 10px;
+      color: #7c0f0f;
+    }
+    .upload-box {
+      margin-top: 40px;
+      background: #f5f9ff;
+      border: 1px solid #da7878;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #dc5252;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #911616;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    footer {
+      background-color: #901111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AIML Department</h1>
+    <p>Student Projects & Product Models</p>
+  </header>
+
+  <section id="top-projects">
+    <h2>Top 3 Student Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="C:\Users\sirik\Desktop\Aihealthcare.webp" alt="AI Health Assistant">
+        <div class="content">
+          <h3>AI Health Assistant</h3>
+          <p>An intelligent chatbot system that helps diagnose basic health issues using symptom analysis.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="C:\Users\sirik\Desktop\aideliverybod.webp" alt="Autonomous Delivery Bot">
+        <div class="content">
+          <h3>Autonomous Delivery Bot</h3>
+          <p>A robot using computer vision and path planning to deliver items inside the campus autonomously.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="C:\Users\sirik\Desktop\aicrop.jpg" alt="AI Based Crop Monitoring">
+        <div class="content">
+          <h3>AI-Based Crop Monitoring</h3>
+          <p>Utilizes drones and machine learning to detect crop diseases early and suggest remedies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="upload">
+    <h2>Upload Your Project</h2>
+    <div class="upload-box">
+      <form>
+        <label for="name">Project Title</label>
+        <input type="text" id="name" name="name" placeholder="Enter project title" required>
+
+        <label for="desc">Project Description</label>
+        <textarea id="desc" name="desc" placeholder="Describe your project" required></textarea>
+
+        <label for="file">Upload Project File</label>
+        <input type="file" id="file" name="file" accept=".zip,.pdf,.pptx,.docx" required>
+
+        <button type="submit">Submit Project</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> AIML Department. All Rights Reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
