@@ -1,4 +1,4 @@
-"""Single-camera tracking interface (M3 placeholder)."""
+"""Single-camera tracking interface (M2 placeholder)."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ class Track(BaseModel):
 class Tracker:
     """Associates detections across frames within one camera.
 
-    Backed by BoT-SORT or ByteTrack (M3). Track IDs are camera-scoped and
+    Backed by BoT-SORT or ByteTrack (M2). Track IDs are camera-scoped and
     formatted as `C<camera index>_<track number>`, e.g. `C1_07`; global identity
     resolution is the `GlobalIDManager`'s job, not the tracker's.
     """

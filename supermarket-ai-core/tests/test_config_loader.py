@@ -1,4 +1,4 @@
-"""Real tests for the configuration loader (M0)."""
+"""Real tests for the configuration loader (M0/M1)."""
 
 import pytest
 
@@ -16,12 +16,23 @@ def test_load_config_contains_required_thresholds():
         "TRACKING_FPS",
         "FRAME_SKIP",
         "VIDEO_RESOLUTION",
+        "MODEL",
+        "OUTPUT",
     ):
         assert key in config
 
 
 def test_reid_threshold_default():
     assert load_config()["REID_SIMILARITY_THRESHOLD"] == 0.70
+
+
+def test_model_and_output_sections():
+    config = load_config()
+    assert config["MODEL"]["WEIGHTS"]
+    assert config["MODEL"]["DEVICE"]
+    assert isinstance(config["MODEL"]["CLASSES"], list)
+    assert config["OUTPUT"]["DIR"]
+    assert config["OUTPUT"]["VIDEO_CODEC"]
 
 
 def test_camera_topology():

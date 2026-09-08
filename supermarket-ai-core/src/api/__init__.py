@@ -1,1 +1,1 @@
-"""Read-only HTTP API layer (M11). Contains no AI processing code."""
+"""Read-only HTTP API layer (M10). Contains no AI processing code."""

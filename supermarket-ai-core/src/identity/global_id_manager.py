@@ -1,4 +1,4 @@
-"""Cross-camera global identity interface (M5 placeholder)."""
+"""Cross-camera global identity interface (M4 placeholder)."""
 
 from __future__ import annotations
 
@@ -56,7 +56,7 @@ class GlobalPerson(BaseModel):
 class GlobalIDManager:
     """Links camera-local tracks into anonymous cross-camera identities.
 
-    Responsibilities (M5):
+    Responsibilities (M4):
       * assign a new `global_id` to an unmatched local track
       * when a track disappears, move its person to `SEARCHING`
       * match a new track against `SEARCHING` people using Re-ID similarity,

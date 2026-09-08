@@ -1,4 +1,4 @@
-"""Storage abstraction (M10 placeholder).
+"""Storage abstraction (M9 placeholder).
 
 Deliberately backend-agnostic: the default implementation will use SQLite, but
 the interface must permit swapping in PostgreSQL without changing callers.

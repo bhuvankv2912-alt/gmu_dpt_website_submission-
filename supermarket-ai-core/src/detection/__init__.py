@@ -1,1 +1,1 @@
-"""Object detection layer (M2)."""
+"""Object detection layer (M1)."""

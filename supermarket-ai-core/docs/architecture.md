@@ -12,6 +12,9 @@
 
 ## Pipeline
 
+M1 implements the first two stages and the artefact writers; everything downstream is still an
+interface.
+
 ```
 VideoManager -> YOLODetector -> Tracker -> ReIDModel -> GlobalIDManager
                                                  |
@@ -32,9 +35,13 @@ VideoManager -> YOLODetector -> Tracker -> ReIDModel -> GlobalIDManager
 | --- | --- |
 | `src/config_loader.py` | Load and validate `config.yaml` / `cameras.yaml`. Single source of tunables. |
 | `src/logging_setup.py` | Uniform logging format and level configuration. |
-| `src/video/source.py` | `VideoSource`: one stream (file / webcam / RTSP), FPS and resolution control, graceful failure, clean shutdown. |
-| `src/video/manager.py` | `VideoManager`: owns many `VideoSource` objects, yields per-camera frames, handles reconnection. |
-| `src/detection/yolo_detector.py` | `YOLODetector`: frame -> `Detection` list (person, product, cart, ...). |
+| `src/video/source.py` | `VideoSource`: one recorded file (`.mp4`/`.avi`/`.mov`), frame skip and resize, graceful failure, clean shutdown. Live sources arrive later. |
+| `src/video/manager.py` | `VideoManager`: resolves camera ids to sources and yields them one at a time, skipping unavailable files. |
+| `src/detection/yolo_detector.py` | `BaseDetector` contract + `YOLODetector`: frame -> `Detection` list. No cross-frame state, so tracking can wrap it later. |
+| `src/detection/annotator.py` | Draws boxes, labels and the HUD onto frames for the annotated output video. |
+| `src/detection/output.py` | `AnnotatedVideoWriter` (codec fallback) and the detection JSON writer. |
+| `src/metrics.py` | `ProcessingMetrics`: frames read/processed, detection counts per class, elapsed time, FPS. |
+| `src/pipeline/detection_pipeline.py` | `DetectionPipeline`: drives a `VideoSource` through a `BaseDetector` and writes the M1 artefacts. |
 | `src/tracking/tracker.py` | `Tracker`: per-camera association producing local track IDs such as `C1_07`. |
 | `src/reid/reid_model.py` | `ReIDModel`: person crop -> L2-normalized embedding; cosine similarity comparison. |
 | `src/identity/global_id_manager.py` | `GlobalIDManager`: links local tracks into a `GlobalPerson`; SEARCHING lifecycle when a person leaves a camera; topology-aware candidate filtering. |

@@ -23,6 +23,9 @@ models/*.pth
 *.mov
 videos/*.mp4
 
+# Generated outputs (annotated videos, detection JSON)
+output/
+
 # Databases
 *.db
 *.sqlite
