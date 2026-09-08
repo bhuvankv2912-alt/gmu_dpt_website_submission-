@@ -12,8 +12,8 @@
 
 ## Pipeline
 
-M1 implements the first two stages and the artefact writers; everything downstream is still an
-interface.
+M1 implements the first two stages and the artefact writers, M2 the tracker; everything downstream
+is still an interface.
 
 ```
 VideoManager -> YOLODetector -> Tracker -> ReIDModel -> GlobalIDManager
@@ -42,7 +42,10 @@ VideoManager -> YOLODetector -> Tracker -> ReIDModel -> GlobalIDManager
 | `src/detection/output.py` | `AnnotatedVideoWriter` (codec fallback) and the detection JSON writer. |
 | `src/metrics.py` | `ProcessingMetrics`: frames read/processed, detection counts per class, elapsed time, FPS. |
 | `src/pipeline/detection_pipeline.py` | `DetectionPipeline`: drives a `VideoSource` through a `BaseDetector` and writes the M1 artefacts. |
-| `src/tracking/tracker.py` | `Tracker`: per-camera association producing local track IDs such as `C1_07`. |
+| `src/pipeline/tracking_pipeline.py` | `TrackingPipeline`: same, through a `BaseTracker`, writing the M2 artefacts. |
+| `src/tracking/tracker.py` | `BaseTracker` contract, `TrackedDetection`, `TrackLabeler` (ids like `person_001`) and the dependency-free `IoUTracker`. |
+| `src/tracking/ultralytics_tracker.py` | `UltralyticsTracker`: ByteTrack / BoT-SORT via `model.track(persist=True)`. |
+| `src/tracking/factory.py` | Builds the configured tracker from `TRACKING` settings. |
 | `src/reid/reid_model.py` | `ReIDModel`: person crop -> L2-normalized embedding; cosine similarity comparison. |
 | `src/identity/global_id_manager.py` | `GlobalIDManager`: links local tracks into a `GlobalPerson`; SEARCHING lifecycle when a person leaves a camera; topology-aware candidate filtering. |
 | `src/behavior/state_machine.py` | Behaviour state transitions (IDLE -> ... -> POTENTIAL_CONCEALMENT). |

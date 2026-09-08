@@ -4,11 +4,12 @@ Multi-camera, privacy-preserving computer vision engine that (eventually) tracks
 across a store, links their per-camera tracks into one anonymous global identity, and flags
 *potential* loss-prevention events for human review.
 
-> **Status: M0 (Architecture & Setup) and M1 (Video Input & Object Detection) complete.**
-> M1 runs YOLO over recorded video and produces an annotated video, structured JSON detections and
-> processing metrics. Tracking, Re-ID, global IDs, behaviour/event logic, database, API and live
-> CCTV/RTSP are **not** implemented — those modules are still M0 interfaces raising
-> `NotImplementedError`.
+> **Status: M0 (Architecture & Setup), M1 (Video Input & Object Detection) and
+> M2 (Multi-Object Tracking) complete.**
+> M1 runs YOLO over recorded video; M2 adds ByteTrack / BoT-SORT tracking with persistent temporary
+> ids (`person_001`), an id-annotated video and tracking JSON. Re-ID, global/cross-camera identity,
+> behaviour and event logic, database, API and live CCTV/RTSP are **not** implemented — those
+> modules are still M0 interfaces raising `NotImplementedError`.
 
 ## Objective
 
@@ -29,7 +30,9 @@ never as accusations or automated decisions.
 - **Data minimisation.** Embeddings and evidence are retained only as long as configured, and
   identities expire after `GLOBAL_ID_TIMEOUT`.
 
-M1 stores no identities at all: it writes only per-frame class labels, boxes and confidences.
+M1 stores no identities at all: it writes only per-frame class labels, boxes and confidences. M2
+adds ids that are temporary, camera-local and appearance-free — they are reset for every video and
+cannot be linked to a person, to another camera or to any earlier run.
 
 ## Architecture Pipeline
 
@@ -40,7 +43,7 @@ Video sources (recorded files today; RTSP later)
         |
    YOLODetector  ->  Detection(person, product)   [M1 - done]
         |
-   Tracker       ->  local track IDs (C1_07)      [M2]
+   Tracker       ->  track ids (person_001)       [M2 - done]
         |
    ReIDModel     ->  normalized embeddings        [M3]
         |
@@ -64,7 +67,7 @@ See [`docs/architecture.md`](docs/architecture.md) for module responsibilities.
 | Language | Python 3.10+ |
 | Video I/O | OpenCV (`opencv-python`) |
 | Detection | Ultralytics YOLO |
-| Tracking | BoT-SORT / ByteTrack (later) |
+| Tracking | ByteTrack / BoT-SORT (Ultralytics) |
 | Deep learning | PyTorch / torchvision |
 | Re-ID | OSNet via Torchreid (later) |
 | Numerics | NumPy |
@@ -113,6 +116,8 @@ Useful flags (all default to `config/config.yaml`, nothing is hard-coded):
 | `--output-dir` | Override `OUTPUT.DIR` |
 | `--no-video` / `--no-json` | Skip an artefact |
 | `--device` | `cpu`, `cuda`, `cuda:0`, `mps` |
+| `--track` | Enable M2 tracking (see below) |
+| `--tracker` | `bytetrack`, `botsort` or `iou` |
 | `--log-level` | `DEBUG` / `INFO` / `WARNING` / `ERROR` |
 
 ### Outputs
@@ -147,10 +152,62 @@ Written to `OUTPUT.DIR` (default `output/`, gitignored):
    frames read, frames processed, detection count, per-class counts, elapsed time, inference time
    and processing FPS.
 
+## M2 Usage
+
+Add `--track` to the same command to associate detections across frames:
+
+```bash
+python -m src.main --source videos/cam1.mp4 --camera CAM1 --weights models/yolov8n.pt \
+  --track --tracker bytetrack --classes person
+```
+
+Tracker options (`--tracker`, or `TRACKING.TRACKER` in config):
+
+| Value | What it is |
+| --- | --- |
+| `bytetrack` | Ultralytics ByteTrack (default) — motion-based, fast |
+| `botsort` | Ultralytics BoT-SORT — motion + camera-motion compensation |
+| `iou` | Built-in greedy IoU tracker; no extra dependencies, useful as a fallback and in tests |
+
+Ids are `<class>_<counter>` (`person_001`, `person_002`, `backpack_001`), assigned in first-seen
+order and kept while the object stays visible. An object leaving the frame frees nothing: its id is
+simply never reused, and an object that re-enters later gets a **new** id (recognising it again is
+Re-ID, M3).
+
+### M2 Outputs
+
+1. `<camera>_<video>_tracked.mp4` — boxes coloured per track id, labelled `person_001 0.88`, with a
+   HUD showing camera, frame, tracks in frame and unique ids so far.
+2. `<camera>_<video>_tracks.json`:
+
+```json
+{
+  "milestone": "M2",
+  "camera_id": "CAM1",
+  "config": {"tracker": "bytetrack", "detection_confidence": 0.45, "frame_skip": 0},
+  "metrics": {"frames_processed": 30, "unique_tracks": 4, "tracks_by_class": {"person": 4},
+              "max_concurrent_tracks": 4, "average_track_length_frames": 25.75,
+              "average_tracks_per_frame": 3.43, "fps": 13.17},
+  "tracks": [
+    {"track_id": "person_001", "class_name": "person", "first_frame": 1, "last_frame": 30,
+     "frames_tracked": 30, "max_confidence": 0.9021}
+  ],
+  "frames": [
+    {"frame_number": 1, "timestamp": "2026-01-01T10:00:00+00:00",
+     "tracks": [{"track_id": "person_001", "class_name": "person", "confidence": 0.88,
+                 "bbox": [120.9, 240.9, 420.0, 604.8], "frames_tracked": 1}]}
+  ]
+}
+```
+
+3. **Tracking metrics** — unique ids, ids per class, max concurrent tracks, average track length in
+   frames, average tracks per frame, plus all M1 metrics.
+
 ## Configuration
 
 `config/config.yaml` owns every tunable: `DETECTION_CONFIDENCE`, `FRAME_SKIP`, `VIDEO_RESOLUTION`
-(`ENABLED`/`width`/`height`), `MODEL` (`WEIGHTS`, `DEVICE`, `CLASSES`) and `OUTPUT`
+(`ENABLED`/`width`/`height`), `MODEL` (`WEIGHTS`, `DEVICE`, `CLASSES`), `TRACKING`
+(`ENABLED`, `TRACKER`, `MIN_IOU`, `MAX_AGE`, `MIN_HITS`) and `OUTPUT`
 (`DIR`, `ANNOTATED_VIDEO`, `JSON`, `VIDEO_CODEC`, `LOG_EVERY`), plus the thresholds later
 milestones will use. `config/cameras.yaml` owns the camera list and topology.
 
@@ -163,8 +220,24 @@ pytest
 M1 tests cover the video source (sequential reads, frame skip, resize, metadata, missing/corrupt/
 unsupported files, idempotent release), the manager (source resolution, skipping unavailable
 videos), the `Detection` schema, the annotator, both writers, the pipeline end to end against a
-fake detector (so no weights are needed in CI), the metrics, and CLI argument handling. Later
-milestones remain `pytest.mark.skip` placeholders.
+fake detector (so no weights are needed in CI), the metrics, and CLI argument handling.
+
+M2 tests cover IoU geometry, id formatting, id stability while an object stays visible, ids for
+objects entering the frame, expiry after an object leaves, survival of a short miss, class-aware
+association, `reset()`, the tracker factory, tracking metrics, id annotation, the tracking JSON and
+the tracking pipeline end to end. Later milestones remain `pytest.mark.skip` placeholders.
+
+## M2 Limitations
+
+- **Single camera, single video.** Ids are camera-local and restart at `person_001` for every run;
+  nothing is matched across cameras or across videos.
+- **Appearance is not used.** ByteTrack and the IoU fallback associate on motion/overlap only, so a
+  long occlusion, a crowd or a person leaving and re-entering produces a new id (id switch). BoT-SORT
+  helps with camera motion but is still not Re-ID.
+- **Frame skipping hurts association.** Large `FRAME_SKIP` values move objects further between
+  processed frames; use `--frame-skip 0` when id stability matters.
+- **Counts are track counts, not people counts** — an id switch inflates `unique_tracks`.
+- **No behaviour, events, identity or persistence** — later milestones.
 
 ## M1 Limitations
 
@@ -187,7 +260,7 @@ milestones remain `pytest.mark.skip` placeholders.
 | --- | --- | --- |
 | M0 | Architecture & setup: structure, config, logging, interfaces | **Complete** |
 | M1 | Video input (recorded) + YOLO detection, annotated video, JSON, metrics | **Complete** |
-| M2 | Single-camera tracking (ByteTrack / BoT-SORT), local track IDs | Pending |
+| M2 | Single-camera tracking (ByteTrack / BoT-SORT), persistent temporary ids | **Complete** |
 | M3 | Re-ID embedding extraction | Pending |
 | M4 | Global ID matching across cameras + SEARCHING lifecycle | Pending |
 | M5 | Behaviour state machine | Pending |
