@@ -1,0 +1,26 @@
+# Example multi-camera deployment.
+# `source` accepts a local file path, a webcam index, or an RTSP URL.
+# `next_cameras` encodes store topology: where a person may plausibly reappear.
+#
+# Topology: CAM1 -> CAM2 / CAM3, CAM2 -> CAM4, CAM3 -> CAM4
+
+cameras:
+  CAM1:
+    name: Entrance
+    source: videos/cam1.mp4        # placeholder; replace with real path / RTSP URL
+    next_cameras: [CAM2, CAM3]
+
+  CAM2:
+    name: Aisle A
+    source: videos/cam2.mp4        # placeholder
+    next_cameras: [CAM4]
+
+  CAM3:
+    name: Aisle B
+    source: videos/cam3.mp4        # placeholder
+    next_cameras: [CAM4]
+
+  CAM4:
+    name: Checkout
+    source: videos/cam4.mp4        # placeholder
+    next_cameras: []

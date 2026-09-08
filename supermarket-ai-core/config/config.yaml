@@ -1,0 +1,28 @@
+# Central tuning file. No threshold may be hard-coded in src/.
+
+# Minimum YOLO confidence for a detection to enter the pipeline.
+DETECTION_CONFIDENCE: 0.45
+
+# Cosine similarity above which two embeddings are considered the same person.
+REID_SIMILARITY_THRESHOLD: 0.70
+
+# Seconds a global identity is retained after its last sighting before expiry.
+GLOBAL_ID_TIMEOUT: 300
+
+# Seconds a global identity stays in the SEARCHING state while waiting to
+# reappear on a downstream camera.
+GLOBAL_ID_SEARCH_TIMEOUT: 60
+
+# Minimum confidence for a behaviour event to be emitted for human review.
+EVENT_CONFIDENCE_THRESHOLD: 0.60
+
+# Target processing rate per camera.
+TRACKING_FPS: 15
+
+# Process 1 frame out of every (FRAME_SKIP + 1). 0 = process every frame.
+FRAME_SKIP: 1
+
+# Frames are resized to this resolution before inference.
+VIDEO_RESOLUTION:
+  width: 1280
+  height: 720
