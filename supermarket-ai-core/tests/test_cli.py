@@ -1,4 +1,4 @@
-"""M1 tests for the CLI wiring."""
+"""Tests for the CLI wiring (M1 detection, M2 tracking)."""
 
 from __future__ import annotations
 
@@ -12,6 +12,8 @@ def test_parser_defaults():
     assert args.camera == "CAM1"
     assert args.source is None
     assert args.log_level == "INFO"
+    assert args.track is False
+    assert args.tracker is None
 
 
 def test_parser_overrides():
@@ -23,6 +25,17 @@ def test_parser_overrides():
     assert args.classes == ["person", "bottle"]
     assert args.max_frames == 5
     assert args.no_video is True
+
+
+def test_parser_accepts_tracking_flags():
+    args = build_parser().parse_args(["--track", "--tracker", "botsort"])
+    assert args.track is True
+    assert args.tracker == "botsort"
+
+
+def test_parser_rejects_unknown_tracker():
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(["--tracker", "sortish"])
 
 
 def test_resolve_resolution_respects_enabled_flag():

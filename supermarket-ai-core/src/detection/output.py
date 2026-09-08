@@ -1,16 +1,19 @@
-"""Writers for M1 artefacts: an annotated video and a detection JSON file."""
+"""Writers for the run artefacts: an annotated video and a detection/tracking JSON file."""
 
 from __future__ import annotations
 
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 
 import cv2
 
 from src.detection.yolo_detector import Detection
 from src.logging_setup import get_logger
+
+if TYPE_CHECKING:  # avoids a src.tracking -> src.detection import cycle at runtime
+    from src.tracking.tracker import TrackedDetection
 
 logger = get_logger(__name__)
 
@@ -126,4 +129,77 @@ def write_detections_json(
     with path.open("w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2)
     logger.info("Wrote detection JSON %s", path)
+    return path
+
+
+def tracks_to_frames(tracks: List["TrackedDetection"]) -> List[Dict[str, Any]]:
+    """Group tracked detections into per-frame records, ordered by frame number."""
+    grouped: Dict[int, Dict[str, Any]] = {}
+    for track in tracks:
+        frame = grouped.setdefault(
+            track.frame_number,
+            {
+                "frame_number": track.frame_number,
+                "timestamp": track.timestamp.isoformat(),
+                "tracks": [],
+            },
+        )
+        frame["tracks"].append(
+            {
+                "track_id": track.track_id,
+                "class_name": track.class_name,
+                "confidence": round(track.confidence, 4),
+                "bbox": [round(v, 2) for v in track.bbox],
+                "frames_tracked": track.frames_tracked,
+            }
+        )
+    return [grouped[key] for key in sorted(grouped)]
+
+
+def tracks_to_summary(tracks: List["TrackedDetection"]) -> List[Dict[str, Any]]:
+    """One record per track id: class, lifespan and confidence range."""
+    summary: Dict[str, Dict[str, Any]] = {}
+    for track in tracks:
+        record = summary.setdefault(
+            track.track_id,
+            {
+                "track_id": track.track_id,
+                "class_name": track.class_name,
+                "first_frame": track.frame_number,
+                "last_frame": track.frame_number,
+                "frames_tracked": 0,
+                "max_confidence": 0.0,
+            },
+        )
+        record["first_frame"] = min(record["first_frame"], track.frame_number)
+        record["last_frame"] = max(record["last_frame"], track.frame_number)
+        record["frames_tracked"] += 1
+        record["max_confidence"] = round(max(record["max_confidence"], track.confidence), 4)
+    return [summary[key] for key in sorted(summary)]
+
+
+def write_tracks_json(
+    path: str | Path,
+    camera_id: str,
+    source: str,
+    tracks: List["TrackedDetection"],
+    metrics: Dict[str, Any],
+    config: Dict[str, Any],
+) -> Path:
+    """Write the structured tracking results for one processed video."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "milestone": "M2",
+        "camera_id": camera_id,
+        "source": str(source),
+        "generated_at": datetime.now().astimezone().isoformat(),
+        "config": config,
+        "metrics": metrics,
+        "tracks": tracks_to_summary(tracks),
+        "frames": tracks_to_frames(tracks),
+    }
+    with path.open("w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2)
+    logger.info("Wrote tracking JSON %s", path)
     return path

@@ -40,7 +40,19 @@ MODEL:
   # Example: ["person", "bottle", "backpack", "handbag"]
   CLASSES: []
 
-# M1 output artefacts.
+# Multi-object tracking (M2). Ids are camera-local and temporary.
+TRACKING:
+  # Always track, without passing --track on the command line.
+  ENABLED: false
+  # bytetrack | botsort (Ultralytics), or iou for the dependency-free fallback.
+  TRACKER: bytetrack
+  # IoU fallback only: association threshold, frames a track survives unmatched,
+  # and matches required before a track is reported.
+  MIN_IOU: 0.3
+  MAX_AGE: 30
+  MIN_HITS: 1
+
+# Output artefacts (M1 detection, M2 tracking).
 OUTPUT:
   DIR: output
   ANNOTATED_VIDEO: true
