@@ -1,0 +1,23 @@
+# Core AI / CV stack. Versions are pinned loosely (>=,<) on purpose: CUDA/driver
+# combinations vary per machine, so minor/patch flexibility is intentional.
+opencv-python>=4.8,<5.0
+ultralytics>=8.1,<9.0
+torch>=2.1,<3.0
+torchvision>=0.16,<1.0
+numpy>=1.24,<2.0
+
+# API layer
+fastapi>=0.110,<1.0
+uvicorn>=0.27,<1.0
+pydantic>=2.5,<3.0
+
+# Config
+pyyaml>=6.0,<7.0
+
+# Re-ID option. torchreid provides OSNet weights; it can be swapped for another
+# embedding model (e.g. fast-reid or a custom OSNet checkpoint) without changing
+# the ReIDModel interface. Version flexibility is deliberate.
+torchreid>=0.2.5
+
+# Testing
+pytest>=7.4,<9.0
