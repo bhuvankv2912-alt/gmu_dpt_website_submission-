@@ -1,4 +1,4 @@
-"""Event engine interface and event schema (M9 placeholder)."""
+"""Event engine interface and event schema (M8 placeholder)."""
 
 from __future__ import annotations
 
@@ -52,7 +52,7 @@ class Event(BaseModel):
 class EventEngine:
     """Converts behaviour observations into reviewable events.
 
-    Responsibilities (M9):
+    Responsibilities (M8):
       * apply `EVENT_CONFIDENCE_THRESHOLD`
       * de-duplicate repeated observations for the same person and behaviour
       * attach evidence

@@ -1,1 +1,1 @@
-"""Single-camera tracking layer (M3)."""
+"""Single-camera tracking layer (M2)."""

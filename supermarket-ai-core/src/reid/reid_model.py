@@ -1,4 +1,4 @@
-"""Person re-identification interface (M4 placeholder).
+"""Person re-identification interface (M3 placeholder).
 
 Re-ID here is *appearance-based only* (clothing, body shape, colour). It performs
 no facial recognition and produces no biometric identity.
@@ -26,7 +26,7 @@ class PersonEmbedding(BaseModel):
 class ReIDModel:
     """Maps a person crop to a normalized embedding.
 
-    Responsibilities (M4):
+    Responsibilities (M3):
       * load an OSNet / Torchreid checkpoint from `models/`
       * turn a cropped person image into an L2-normalized vector
       * compare embeddings by cosine similarity against

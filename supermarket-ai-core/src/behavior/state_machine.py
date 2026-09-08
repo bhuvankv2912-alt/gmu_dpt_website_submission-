@@ -1,4 +1,4 @@
-"""Behaviour state machine interface (M6 placeholder)."""
+"""Behaviour state machine interface (M5 placeholder)."""
 
 from __future__ import annotations
 

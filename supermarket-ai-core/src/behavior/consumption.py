@@ -1,4 +1,4 @@
-"""Potential in-store consumption detection interface (M8 placeholder)."""
+"""Potential in-store consumption detection interface (M7 placeholder)."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from src.behavior.state_machine import BehaviorObservation
 class ConsumptionDetector:
     """Flags *potential* in-store consumption for human review.
 
-    Heuristic sketch (M8): a carried product repeatedly approaches the face
+    Heuristic sketch (M7): a carried product repeatedly approaches the face
     region and its size/visibility decreases over time. The face region is a
     coarse geometric zone only — no facial recognition is performed.
     """

@@ -1,4 +1,4 @@
-"""Tests for the API layer: /health works, other routes are stubs (M0/M11)."""
+"""Tests for the API layer: /health works, other routes are stubs (M0/M10)."""
 
 import pytest
 
@@ -13,16 +13,16 @@ def test_health_endpoint():
     assert response.json()["status"] == "ok"
 
 
-@pytest.mark.skip(reason="M11: API endpoints not implemented yet")
+@pytest.mark.skip(reason="M10: API endpoints not implemented yet")
 def test_events_endpoint_returns_events():
     """GET /events should return persisted reviewable events."""
 
 
-@pytest.mark.skip(reason="M11: API endpoints not implemented yet")
+@pytest.mark.skip(reason="M10: API endpoints not implemented yet")
 def test_person_journey_endpoint():
     """GET /persons/{global_id}/journey should return the camera history."""
 
 
-@pytest.mark.skip(reason="M11: API endpoints not implemented yet")
+@pytest.mark.skip(reason="M10: API endpoints not implemented yet")
 def test_system_status_endpoint():
     """GET /system/status should report camera health and processing rates."""

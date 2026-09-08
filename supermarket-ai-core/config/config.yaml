@@ -23,6 +23,28 @@ TRACKING_FPS: 15
 FRAME_SKIP: 1
 
 # Frames are resized to this resolution before inference.
+# Set ENABLED to false to keep each video at its native resolution.
 VIDEO_RESOLUTION:
+  ENABLED: true
   width: 1280
   height: 720
+
+# Detection model (M1).
+MODEL:
+  # Downloaded automatically by ultralytics if only a name is given; place a
+  # local checkpoint under models/ to avoid network access. See models/README.md.
+  WEIGHTS: yolov8n.pt
+  # "auto" lets torch choose; otherwise "cpu", "cuda", "cuda:0", "mps".
+  DEVICE: auto
+  # Empty list = keep every class the pretrained model supports.
+  # Example: ["person", "bottle", "backpack", "handbag"]
+  CLASSES: []
+
+# M1 output artefacts.
+OUTPUT:
+  DIR: output
+  ANNOTATED_VIDEO: true
+  JSON: true
+  VIDEO_CODEC: mp4v
+  # Emit a progress log line every N processed frames.
+  LOG_EVERY: 50

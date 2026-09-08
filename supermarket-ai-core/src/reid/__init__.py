@@ -1,1 +1,1 @@
-"""Appearance re-identification layer (M4)."""
+"""Appearance re-identification layer (M3)."""

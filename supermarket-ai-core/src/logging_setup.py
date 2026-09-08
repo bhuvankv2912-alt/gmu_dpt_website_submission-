@@ -4,16 +4,22 @@ from __future__ import annotations
 
 import logging
 import sys
+from typing import Union
 
 LOG_FORMAT = "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
-def setup_logging(level: int = logging.INFO) -> logging.Logger:
+def setup_logging(level: Union[int, str] = logging.INFO) -> logging.Logger:
     """Configure the root logger with a single clean stdout handler.
 
     Repeated calls replace existing handlers so logging stays idempotent.
     """
+    if isinstance(level, str):
+        level = logging.getLevelName(level.upper())
+        if not isinstance(level, int):
+            level = logging.INFO
+
     root = logging.getLogger()
     root.setLevel(level)
     for handler in list(root.handlers):

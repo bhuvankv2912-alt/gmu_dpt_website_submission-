@@ -1,1 +1,1 @@
-"""Event generation layer (M9)."""
+"""Event generation layer (M8)."""

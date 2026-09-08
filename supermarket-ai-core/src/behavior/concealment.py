@@ -1,4 +1,4 @@
-"""Potential concealment detection interface (M7 placeholder)."""
+"""Potential concealment detection interface (M6 placeholder)."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from src.behavior.state_machine import BehaviorObservation
 class ConcealmentDetector:
     """Flags a *potential* concealment for human review.
 
-    Heuristic sketch (M7): a carried product enters a concealment zone (pocket,
+    Heuristic sketch (M6): a carried product enters a concealment zone (pocket,
     bag, waistband, under clothing) and does not re-emerge within a configured
     window. Output is always POTENTIAL and requires review; the detector must
     never assert theft.

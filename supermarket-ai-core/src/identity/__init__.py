@@ -1,1 +1,1 @@
-"""Cross-camera anonymous identity layer (M5)."""
+"""Cross-camera anonymous identity layer (M4)."""
